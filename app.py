@@ -5,16 +5,18 @@ from llama_index.core.llms import ChatMessage
 app = Flask(__name__)
 
 # Initialize the LlamaAPI with the given API key
-llm = LlamaAPI(api_key="LL-8qCB8pTQ84Sdg45Ww3IqfNpWMelyfGjctb22hLEmTPGtvBeR6Zyw1rofOrVHBfUq", temperature=0.0)
+llm = LlamaAPI(api_key="LL-2F3X6yxwbPb7AWSFSYnrIOMc6aE1fkTXm2DVgpdqT2O2iWf416UD7yq3kN2dWRuQ", temperature=0.0)
 
 def process_input(input_text):
     messages = [
         ChatMessage(
+            model="llama3-70b",
             role="system", 
             content='''
           You will give pseudocode for the given input and follow these instructions:
-          Always capitalize the initial word (often one of the main six constructs).
+          Always capitalize the initial word (often one of the main six constructs). Not the whole sentence
           Make only one statement per line.
+          Keep it free of any programming language. Try to explain the code
           Indent to show hierarchy, improve readability and show nested constructs.
           Always end multi-line sections using any of the END keywords (ENDIF, ENDWHILE, etc.).
           Keep your statements programming language independent.
@@ -47,11 +49,16 @@ def index():
         }
         #response {
             font-family: Courier New; /* Ensuring response text is in Calibri font */
-            align: center;
+            text-align" left;
+            padding-right: 100px;
         }
         .textarea-wrapper {
             display: inline-block;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .responsePane{
+            display: flex;
+            justify-content: center;
         }
 
         textarea {
@@ -61,24 +68,6 @@ def index():
             border: 1px solid #ccc;
             border-radius: 5px;
             resize: none;
-        #button1 {
-            background-color: #006989;
-            color: #F3F7EC;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
-
-        #button1:hover {
-            background-color: #005C78;
-        }
-
-        #button1:active {
-            box-shadow: none;
-            color: #F3F7EC;
-        }
         label {
             color: #006989;
             font-family: 'Archivo Black', sans-serif;
@@ -89,7 +78,7 @@ def index():
     </style>
 </head>
 <body>
-    <center><h1 style="font-family: 'Archivo Black', sans-serif; font-size: 40px; color: #006989;">logicquill.</h1><center>
+    <center><h1 style="font-family: 'Archivo Black', sans-serif; font-size: 40px; color: #006989;">logicquill.</h1></center>
     <br><br>
     <center>
     <form id="llamaForm">
@@ -98,11 +87,12 @@ def index():
          <div class="textarea-wrapper">
         <textarea id="inputText" name="inputText" cols="50" rows="7" required></textarea>
     </div><br><br>
-        <button id="button1" type="submit">Generate</button>
+        <button type="submit">Generate</button>
     </form>
-    <center>
+    </center><br>
+    <div class="responsePane">
     <p id="response">Results will be displayed here. Simply copy it. <br> <br>Also, It’s Impossible to Hum While Holding Your Nose </p>
-
+    </div>
     <script>
         document.getElementById('llamaForm').addEventListener('submit', function(event) {
             event.preventDefault();
