@@ -5,7 +5,7 @@ from llama_index.core.llms import ChatMessage
 app = Flask(__name__)
 
 # Initialize the LlamaAPI with the given API key
-llm = LlamaAPI(api_key="LL-2F3X6yxwbPb7AWSFSYnrIOMc6aE1fkTXm2DVgpdqT2O2iWf416UD7yq3kN2dWRuQ", temperature=0.0)
+llm = LlamaAPI(api_key="LL-2F3X6yxwbPb7AWSFSYnrIOMc6aE1fkTXm2DVgpdqT2O2iWf416UD7yq3kN2dWRuQ", temperature=0)
 
 def process_input(input_text):
     messages = [
@@ -13,17 +13,17 @@ def process_input(input_text):
             model="llama3-70b",
             role="system", 
             content='''
-          You will give pseudocode for the given input and follow these instructions:
-          Always capitalize the initial word (often one of the main six constructs). Not the whole sentence
-          Make only one statement per line.
-          Keep it free of any programming language. Try to explain the code
-          Indent to show hierarchy, improve readability and show nested constructs.
-          Always end multi-line sections using any of the END keywords (ENDIF, ENDWHILE, etc.).
-          Keep your statements programming language independent.
-          Use the naming domain of the problem, not that of the implementation. For instance: “Append the last name to the first name” instead of “name = first+last.”
-          Keep it simple, concise and readable.
-          Use ← to indicate to a variable 
+            Write the pseudocode where 
+            Always capitalize the initial word (often one of the main six constructs).
+            Make only one statement per line.
+            Indent to show hierarchy, improve readability and show nested constructs.
+            Always end multi-line sections using any of the END keywords (ENDIF, ENDWHILE, etc.).
+            Keep your statements programming language independent.
+            Use the naming domain of the problem, not that of the implementation. For instance: “Append the last name to the first name” instead of “name = first+last.”
+            Keep it simple, concise and readable
           '''
+          
+            
         ),
         ChatMessage(role="user", content=input_text),
     ]
@@ -44,7 +44,7 @@ def index():
     <link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet'>
     <style>
         body {
-            background-color: #F3F7EC;
+            background-color: #EEEEEE;
             font-family: Courier New;
         }
         #response {
@@ -59,8 +59,34 @@ def index():
         .responsePane{
             display: flex;
             justify-content: center;
+            border: 1px solid black;
+            background-color: #f5f5f5; 
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            resize: none;
+            width: 50%; 
+            margin: 0 auto;
         }
-
+        .button{
+            background-color: #373A40;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s box-shadow 0.2s;
+            padding: 10px 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+            &:hover {
+                background-color: #686D76; 
+            }
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            &:active {
+                background-color: #DC5F00;
+                transform: scale(0.95);
+                box-shadow: none; 
+            }
+            
+        }
         textarea {
             width: 300px;
             height: 150px;
@@ -75,10 +101,11 @@ def index():
         h1{
           text-align: left;
         }
+        
     </style>
 </head>
 <body>
-    <center><h1 style="font-family: 'Archivo Black', sans-serif; font-size: 40px; color: #006989;">logicquill.</h1></center>
+    <center><h1 style="font-family: 'Archivo Black', sans-serif; font-size: 40px; color: #373A40;">logicquill.</h1></center>
     <br><br>
     <center>
     <form id="llamaForm">
@@ -87,7 +114,7 @@ def index():
          <div class="textarea-wrapper">
         <textarea id="inputText" name="inputText" cols="50" rows="7" required></textarea>
     </div><br><br>
-        <button type="submit">Generate</button>
+        <button class="button" type="submit">Generate</button>
     </form>
     </center><br>
     <div class="responsePane">
