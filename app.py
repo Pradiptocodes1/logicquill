@@ -64,7 +64,7 @@ def index():
             box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             resize: none;
-            width: 50%; 
+            width: auto; 
             margin: 0 auto;
         }
         .button{
