@@ -106,6 +106,33 @@ def index():
           display: none;
         }
         @keyframes l1 {to{transform: rotate(.5turn)}}
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .back-button {
+            background-color: #686D76;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            padding: 10px 10px;
+            border-radius: 5px;
+            border: 1px solid black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-button:hover {
+            background-color: #373A40;
+        }
+        
+        .back-button:active {
+            background-color: #DC5F00;
+            transform: scale(0.95);
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -118,13 +145,18 @@ def index():
          <div class="textarea-wrapper">
         <textarea id="inputText" name="inputText" cols="50" rows="7" required></textarea>
     </div><br><br>
-        <button class="button" type="submit">Generate</button>
+        <div class="button-container">
+            <button class="button" type="submit">Generate</button>
+            <a href="https://www.citewise.tech/toolkitspage.html"><button class="back-button" type="button" id="backButton">Back</button></a>
+        </div>
     </form>
     <div class="loader"></div>
     </center><br>
+    <center>
     <div class="responsePane">
     <p id="response">Results will be displayed here. Simply copy it. <br> <br>Also, It's Impossible to Hum While Holding Your Nose </p>
     </div>
+    </center>
     <script>
         document.getElementById('mistralForm').addEventListener('submit', function(event) {
             event.preventDefault();
