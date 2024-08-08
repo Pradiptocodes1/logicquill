@@ -5,7 +5,7 @@ from mistralai.models.chat_completion import ChatMessage
 app = Flask(__name__)
 
 # Initialize the MistralClient with the given API key
-mistral_client = MistralClient(api_key="azyEN3ZYjcvg964D8U99slt0JzY5jG4F")
+mistral_client = MistralClient(api_key="SKYjG5bL2rn3nnMwhNtXazBs0MFNteih")
 
 def process_input(input_text):
     messages = [
@@ -19,8 +19,13 @@ def process_input(input_text):
             Always end multi-line sections using any of the END keywords (ENDIF, ENDWHILE, etc.).
             Keep your statements programming language independent.
             Use the naming domain of the problem, not that of the implementation. For instance: "Append the last name to the first name" instead of "name = first+last."
-            Keep it simple, concise and readable
-            properly describe and use appropriate symbols if neccessary for sets, lists unions arrows etc. 
+            Express each statement or action on its own line. 
+            • Include programming constructs that are common in most (imperative) programming languages whenever applicable (for, while, repeat/until, switch/case, return, if/then/else, etc.). 
+            • Use indentation of the inner parts of loops, if statements, and methods/function bodies (this is preferred over begin/end for conciseness). 
+            • Let keywords and commands stand out clearly (e.g. using bold face). • Use comments, indicated using a clear symbol and layout (e.g. ‘//‘ and position to the right of the code). 
+            • For assignments (e.g., of 42 to x) you may use either x ← 42 or x := 42. These are preferred over x = 42, because this can then be reserved for the logical statement of whether x is equal to 42.
+            • Refrain from using language-specific constructs such as using a dot for a method call to an object (as in this.example()).
+            • When methods are using parameters, assume they are passed on by value (i.e., a copy is assumed to be made).
             '''
         ),
         ChatMessage(role="user", content=input_text),
