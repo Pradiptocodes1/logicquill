@@ -5,7 +5,7 @@ from mistralai.models.chat_completion import ChatMessage
 app = Flask(__name__)
 
 # Initialize the MistralClient with the given API key
-mistral_client = MistralClient(api_key="SKYjG5bL2rn3nnMwhNtXazBs0MFNteih")
+mistral_client = MistralClient(api_key="YhQawUzc9ymDAjC1cjXJqBpaIXz4jjPu")
 
 def process_input(input_text):
     messages = [
